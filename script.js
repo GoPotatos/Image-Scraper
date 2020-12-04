@@ -11,6 +11,10 @@ window.onload=()=>{
             console.log("response",res);
             const maxValue=+res.maxValue;
             const src=res.src;
+            //const resTitle=res.title;
+            //const index=resTitle.indexOf("-");
+            //const title=index!==-1?resTitle.replace(/\W+/g,"-").slice(0,index-1):resTitle.replace(/\W+/g,"-");
+            const title=res.title;
             const srcComponents=src.match(/.*\/images\/([^/]*).*\?/i)||src.match(/.*\/([^/]*)\.jpg/);
             const directory=srcComponents[1];
             //for(let i=0;i<maxValue;i++){
@@ -22,7 +26,7 @@ window.onload=()=>{
                 }else{
                     //console.log("Max value doesn't exist");
                     const url=srcComponents[0];
-                    const filename="Image Scraper/"+directory+"/"+directory+".jpg"
+                    const filename="Image Scraper/"+title+"/"+title+".jpg"
 
                     chrome.downloads.download({url,filename},(done)=>{
                         display.innerHTML="<h3>Done!</h3>"
@@ -31,7 +35,8 @@ window.onload=()=>{
                 }
                 function downloadFile(i){
             const url=src.slice(0,srcComponents[0].lastIndexOf("/"))+"/img" +(i).toString().padStart(2,0)+".jpg";
-            const filename="Image Scraper/"+directory+"/img"+(i).toString().padStart(2,0)+".jpg";
+            //const filename="Image Scraper/"+title+"/"+title+(i).toString().padStart(2,0)+".jpg";
+            const filename="Image Scraper/"+title+"/"+title+"-"+(i).toString()+".jpg";
             //console.log("filename is ",filename)
             chrome.downloads.download({url,filename},()=>{
                 display.innerHTML="<h3>"+(maxValue-i+1)+" files have been downloaded from total of "+(maxValue+1)+"</h3>"
