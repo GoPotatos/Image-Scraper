@@ -1,0 +1,21 @@
+{
+    "manifest_version":2,
+    "name":"Image Scraper",
+    "version":"1.0",
+    "description":"An extension for extracting images",
+    "icons":{
+        "24":"icons/24.png"
+    },
+    "browser_action":{
+        "default_icon":"icons/24.png",
+        "default_popup":"index.html"
+        
+    },
+    "content_scripts":[
+        {
+            "matches": ["<all_urls>"],
+            "js":["content.js"]
+        }
+    ],
+    "permissions":["downloads","<all_urls>","downloads.shelf"]
+}
